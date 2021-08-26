@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import Movie from "./Movie";
+import "./App.css";
 
 class App extends React.Component {
   state = {
@@ -18,12 +19,14 @@ class App extends React.Component {
   render() {
     const {isLoading, movies} = this.state;
     return (
-      <section class="container">
-        {isLoading ? 
-        (<div class="loader"><span class="loader__text">Loading...</span></div>) 
-        : 
-        movies.map(movie => // map()은 return이 반드시 필요. => 는 return이 포함되어 있음. map안에서의 movie는 내가 방금 만든 이름
-          <Movie key={movie.id} id={movie.id} year={movie.year} title={movie.title} summary={movie.summary} poster={movie.medium_cover_image}/>
+      <section className="container">
+        {isLoading ? (<div className="loader"><span className="loader__text">Loading...</span></div>) 
+        : (
+          <div className="movies">
+            {movies.map(movie => (
+              <Movie key={movie.id} id={movie.id} year={movie.year} title={movie.title} summary={movie.summary} poster={movie.medium_cover_image} genres={movie.genres}/>
+            ))}
+          </div>
         )}
       </section>
     )
